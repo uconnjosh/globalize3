@@ -80,7 +80,7 @@ module Globalize
 
       def translated_attributes
         translated_attribute_names.inject({}) do |attributes, name|
-          attributes.merge(name.to_s => translation.send(name))
+          attributes.merge(name.to_s => globalize.fetch(Globalize.locale, name))
         end
       end
 
@@ -104,6 +104,7 @@ module Globalize
 
       def reload(options = nil)
         translated_attribute_names.each { |name| @attributes.delete(name.to_s) }
+        @translation_caches = {}
         globalize.reset
         super(options)
       end
