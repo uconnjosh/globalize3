@@ -141,6 +141,10 @@ module Globalize
         @translation_caches[::Globalize.locale] = translation.previous_version
       end
 
+      def globalize_fallbacks(locale)
+        Globalize.fallbacks(locale)
+      end
+
     protected
 
       def each_locale_and_translated_attribute
